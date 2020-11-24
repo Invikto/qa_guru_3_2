@@ -1,17 +1,27 @@
 plugins {
-	id 'java'
+  id 'java'
 }
 
 repositories {
-	mavenCentral()
+  mavenCentral()
 }
 
+ext.versions = [
+  selenide: "5+",
+  jupiter: "5+"
+]
+
+ext.jupiter = [
+  api: "org.junit.jupiter:junit-jupiter-api:$versions.jupiter",
+  engine: "org.junit.jupiter:junit-jupiter-engine:$versions.jupiter"
+]
+
 dependencies {
-	testImplementation 'com.codeborne:selenide:5.15.1'
-	testImplementation "org.junit.jupiter:junit-jupiter-api:5.6.2"
-	testRuntimeOnly "org.junit.jupiter:junit-jupiter-engine:5.6.2"
+  testImplementation "com.codeborne:selenide:$versions.selenide"
+  testImplementation jupiter.api
+  testRuntimeOnly jupiter.engine
 }
 
 test {
-	useJUnitPlatform()
+  useJUnitPlatform()
 }
